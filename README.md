@@ -102,3 +102,35 @@ In another terminal you can run a nameko shell to run the rpc's of your microser
 > print(book)
 >
 > out: 'title1'
+
+You can unit test your view in book/test
+
+> from django.test import TestCase  
+from .models import Book  
+from .views import DjangoService  
+
+>class ServiceTestCase(TestCase):  
+    def setUp(self):  
+        Book.objects.create(title='title_test', author='author_test')  
+
+>    def test_first_book(self):  
+        book = Book.objects.first()  
+        self.assertEqual(DjangoService.first_book(self), book.title)  
+
+>    def test_save_book(self):  
+        title = 'title_test2'  
+        author = 'author_test2'  
+        DjangoService.save_book(self, title, author)  
+        book = Book.objects.get(title=title, author=author)  
+        self.assertEqual(book.title, title)  
+        self.assertEqual(book.author, author)  
+
+and run
+
+> python manage.py test
+
+> out:  
+Ran 2 tests in 0.006s  
+OK
+
+
