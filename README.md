@@ -30,8 +30,7 @@ $ django-admin startapp book
 Insert you app on INSTALLED_APPS in book\_microservice/settings.py
 
 
-> 
-INSTALLED_APPS = [  
+> INSTALLED_APPS = [  
     'django.contrib.admin',  
      ...  
     'django.contrib.staticfiles',  
